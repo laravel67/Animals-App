@@ -1,0 +1,105 @@
+{
+    "openapi":"3.0.3",
+    "info":{
+        "title":"User API",
+        "description": "User API",
+        "version": "1.0.0"
+    },
+    "servers":[
+        {
+            "url":"http://restful-api.test"
+        }
+    ],
+    "paths":{
+        "/api/users":{
+            "post":{
+                "description":"Register new User",
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "example":{
+                                "murtaki":{
+                                    "description":"Register new Murtaki",
+                                    "value":{
+                                        "username":"murtaki",
+                                        "password": "password123",
+                                        "name":"Murtaki Shihab"
+                                    }
+                                }
+                            },
+                            "schema":{
+                                "type":"object",
+                                "required":[
+                                    "name","username","password"
+                                ],
+                                "properties":{
+                                    "username":{
+                                        "type":"string"
+                                    },
+                                    "password":{
+                                       "type":"string"
+                                    },
+                                    "name":{
+                                       "type":"string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "respons":{
+                    "400":{
+                        "description":"Validation Error"
+                    },
+                    "201":{
+                        "description": "Success create user",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "data":{
+                                            "type":"object",
+                                            "properties":{
+                                                "id":{
+                                                    "type":"number"
+                                                },
+                                                "username":{
+                                                    "type":"string"
+                                                },
+                                                "name":{
+                                                    "type":"string"
+                                                }
+                                            }
+                                        },
+                                        "errors":{
+                                            "type":"object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/login":{
+            "post":{
+                "description":"Login User"
+            }
+        },
+        "/api/user/current":{
+            "get":{
+                "description":"Get current user"
+            },
+            "patch":{
+                "description":"Update current user"
+            }
+        },
+        "/api/user/logout":{
+            "delete":{
+                "description": "Logout current user"
+            }
+        }
+    }
+}
